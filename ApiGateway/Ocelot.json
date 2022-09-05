@@ -1,0 +1,49 @@
+{
+  "Routes": [
+    {
+      "DownstreamHostAndPorts": [
+        {
+          "Host": "localhost",
+          "Port": 7239
+        }
+
+      ],
+      "DownstreamPathTemplate": "/api/Authendication",
+      "DownstreamScheme": "https",
+      "RouteIsCaseSensitive": false,
+      "UpstreamHttpMethod": [ "POST" ],
+      "UpstreamPathTemplate": "/api/GetToken"
+    },
+    {
+      "DownstreamHostAndPorts": [
+        {
+          "Host": "localhost",
+          "Port": 7191
+        }
+
+      ],
+      "DownstreamPathTemplate": "/api/Admin/login",
+      "DownstreamScheme": "https",
+      "RouteIsCaseSensitive": false,
+      "UpstreamHttpMethod": [ "GET" ],
+      "UpstreamPathTemplate": "/admin/login"
+    },
+   
+    {
+      "DownstreamHostAndPorts": [
+        {
+          "Host": "localhost",
+          "Port": 7057
+        }
+
+      ],
+      "DownstreamPathTemplate": "/api/Member/login",
+      "DownstreamScheme": "https",
+      "RouteIsCaseSensitive": false,
+      "UpstreamHttpMethod": [ "GET" ],
+      "UpstreamPathTemplate": "/Member/login"
+    }
+
+
+  ]
+}
