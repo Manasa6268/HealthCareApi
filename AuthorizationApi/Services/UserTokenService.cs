@@ -42,9 +42,9 @@ namespace AuthorizationApi.Services
                 var claims = new List<Claim>();
                 claims.Add(new Claim("sub", (userDetails[0].UserId).ToString()));
                 claims.Add(new Claim("UserName", userDetails[0].UserName));
+        
+                    claims.Add(new Claim("Role", userDetails[0].UserType));
                 
-                claims.Add(new Claim("UserType", userDetails[0].UserType));
-
                 claims.AddRange(audience.Select(aud => new Claim(JwtRegisteredClaimNames.Aud, aud)));
 
             var securityKey = new SymmetricSecurityKey(Encoding.ASCII.GetBytes(key));

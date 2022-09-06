@@ -22,13 +22,54 @@
         }
 
       ],
-      "DownstreamPathTemplate": "/api/Admin/login",
+      "DownstreamPathTemplate": "/api/Admin/signup",
+      "DownstreamScheme": "https",
+      "RouteIsCaseSensitive": false,
+      "UpstreamHttpMethod": [ "POST" ],
+      "UpstreamPathTemplate": "/admin/signup"
+    },
+    {
+      "DownstreamHostAndPorts": [
+        {
+          "Host": "localhost",
+          "Port": 7191
+        }
+
+      ],
+      "DownstreamPathTemplate": "/api/Admin/AddMember",
+      "DownstreamScheme": "https",
+      "RouteIsCaseSensitive": false,
+      "UpstreamHttpMethod": [ "POST" ],
+      "UpstreamPathTemplate": "/admin/addmember"
+    },
+    {
+      "DownstreamHostAndPorts": [
+        {
+          "Host": "localhost",
+          "Port": 7191
+        }
+
+      ],
+      "DownstreamPathTemplate": "/api/Admin/SubmitClaim",
+      "DownstreamScheme": "https",
+      "RouteIsCaseSensitive": false,
+      "UpstreamHttpMethod": [ "POST" ],
+      "UpstreamPathTemplate": "/admin/submitclaim"
+    },
+    {
+      "DownstreamHostAndPorts": [
+        {
+          "Host": "localhost",
+          "Port": 7191
+        }
+
+      ],
+      "DownstreamPathTemplate": "/api/Admin/GetMemberDetails",
       "DownstreamScheme": "https",
       "RouteIsCaseSensitive": false,
       "UpstreamHttpMethod": [ "GET" ],
-      "UpstreamPathTemplate": "/admin/login"
+      "UpstreamPathTemplate": "/admin/getmembers"
     },
-   
     {
       "DownstreamHostAndPorts": [
         {
@@ -42,7 +83,51 @@
       "RouteIsCaseSensitive": false,
       "UpstreamHttpMethod": [ "GET" ],
       "UpstreamPathTemplate": "/Member/login"
+    },
+    {
+      "DownstreamHostAndPorts": [
+        {
+          "Host": "localhost",
+          "Port": 7057
+        }
+
+      ],
+      "DownstreamPathTemplate": "/api/Member/UpdateMember",
+      "DownstreamScheme": "https",
+      "RouteIsCaseSensitive": false,
+      "UpstreamHttpMethod": [ "POST" ],
+      "UpstreamPathTemplate": "/Member/updatemember"
+    },
+    {
+      "DownstreamHostAndPorts": [
+        {
+          "Host": "localhost",
+          "Port": 7057
+        }
+
+      ],
+      "DownstreamPathTemplate": "/api/Member/SubmitClaim",
+      "DownstreamScheme": "https",
+      "RouteIsCaseSensitive": false,
+      "UpstreamHttpMethod": [ "POST" ],
+      "UpstreamPathTemplate": "/Member/submitclaim"
+    },
+    {
+      "DownstreamHostAndPorts": [
+        {
+          "Host": "localhost",
+          "Port": 7057
+        }
+
+      ],
+      "DownstreamPathTemplate": "/api/Member/fetchDetails",
+      "DownstreamScheme": "https",
+      "RouteIsCaseSensitive": false,
+      "UpstreamHttpMethod": [ "GET" ],
+      "UpstreamPathTemplate": "/Member/fetchdetails"
     }
+
+
 
 
   ]

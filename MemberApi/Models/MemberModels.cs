@@ -1,35 +1,11 @@
 ﻿using System.ComponentModel.DataAnnotations;
 
-namespace AdminApi.Models
+namespace MemberApi.Models
 {
-    public class UserDetails
-    {
-        [Key]
-        [Required]
-        public string UserId { get; set; }
-        public string UserName { get; set; }
-        
-        public string Password { get; set; }
-        public string UserType { get; set; }
-
-        public UserDetails(string userId, string userName, string password, string userType)
-        {
-            UserId = userId;
-            UserName = userName;
-            Password = password;
-            UserType = userType;
-        }
-    }
-    public class UserClaims
-    {
-
-        public string UserName { get; set; }
-        public string UserType { get; set; }
-    }
     public class MemberDetails
     {
         [Key]
-        
+
         public string MemberId { get; set; }
         public string FirstName { get; set; }
         public string LastName { get; set; }
@@ -56,11 +32,28 @@ namespace AdminApi.Models
 
     }
 
-   
+    public class UserDetails
+    {
+        [Key]
+        [Required]
+        public string UserId { get; set; }
+        public string UserName { get; set; }
+
+        public string Password { get; set; }
+        public string UserType { get; set; }
+
+        public UserDetails(string userId, string userName, string password, string userType)
+        {
+            UserId = userId;
+            UserName = userName;
+            Password = password;
+            UserType = userType;
+        }
+    }
 
     public class ClaimDetails
     {
-        [Key,Required]
+        [Key, Required]
         public string ClaimId { get; set; }
         public string MemberId { get; set; }
         public string ClaimType { get; set; }
@@ -73,24 +66,9 @@ namespace AdminApi.Models
 
 
     }
-    public class MemberList
-    {
-        [Key]
-        public string MemberId { get; set; }
-        public string FirstName { get; set; }
-        public string LastName { get; set; }
-
-        public string PhysicianName { get; set; }
-        public string ClaimId { get; set; }
-        
-        
-        public int ClaimAmount { get; set; }
-        public DateTime ClaimDate { get; set; }
-    }
     public struct Role
     {
         public const string Admin = "admin";
         public const string Member = "member";
     }
-
 }

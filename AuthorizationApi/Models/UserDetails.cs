@@ -27,6 +27,11 @@ namespace AuthorizationApi.Models
             UserType = userType;
         }
     }
-    
+    public struct Role
+    {
+        public const string Admin = "Admin";
+        public const string Guest = "Guest";
+    }
+
 
 }

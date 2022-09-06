@@ -3,6 +3,7 @@ using AdminApi.Services;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
+using System.Security.Claims;
 
 namespace AdminApi.Controllers
 {
@@ -29,12 +30,55 @@ namespace AdminApi.Controllers
                 return BadRequest();
             }
         }
+        
+        [Authorize(Role.Admin)]
+        [HttpPost]
+        [Route("AddMember")]
+        public IActionResult AddMember([FromBody] MemberDetails memberDetails)
+        {
+            try
+            {
+                return Ok(_adminService.AddMember(memberDetails));
+            }
+            catch
+            {
+                return BadRequest();
+            }
+        }
+        [Authorize]
+        [HttpPost]
+        [Route("SubmitClaim")]
+        public IActionResult SubmitClaim([FromBody] ClaimDetails claimDetails)
+        {
+            try
+            {
+                return Ok(_adminService.SubmitClaim(claimDetails));
+            }
+            catch
+            {
+                return BadRequest();
+            }
+        }
         [Authorize]
         [HttpGet]
-        [Route("login")]
-        public IActionResult Login()
+        [Route("GetMemberDetails")]
+        public ActionResult<List<MemberList>> GetMemberDetails(string? MemberId, string? FirstName, string? LastName, string? ClaimId, string? PhysicianName)
         {
-            return Ok("login Successfull");
+            try
+            {
+                return Ok(_adminService.GetMemberDetails(MemberId,FirstName,LastName,ClaimId,PhysicianName));
+            }
+            catch
+            {
+                return BadRequest();
+            }
+        }
+        private UserClaims VerifyUser(ClaimsIdentity identity)
+        {
+            UserClaims userClaims = new UserClaims();
+            userClaims.UserName = identity.FindFirst("UserName").Value.ToString();
+            userClaims.UserType = identity.FindFirst("UserType").Value.ToString();
+            return userClaims;
         }
     }
 }
