@@ -6,7 +6,7 @@ namespace AuthorizationApi
     public class DbMasterContext : DbContext
     {
         private readonly IConfiguration _configuration;
-        public DbSet<UserDetails> UserDetails { get; set; }
+        public DbSet<MemberDetails> memberDetails { get; set; }
         
         public DbMasterContext(IConfiguration configuration)
         {
@@ -22,7 +22,7 @@ namespace AuthorizationApi
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
-            modelBuilder.Entity<UserDetails>().ToTable("tbl_Users");
+            modelBuilder.Entity<MemberDetails>().ToTable("tbl_Members");
            
         }
     }

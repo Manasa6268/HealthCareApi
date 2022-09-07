@@ -1,5 +1,6 @@
 
 using MemberApi;
+using MemberApi.Models;
 using MemberApi.Services;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.IdentityModel.Tokens;
@@ -15,9 +16,24 @@ builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
 builder.Services.AddDbContext<DbMemberContext>();
 builder.Services.AddScoped<IMemberService, MemberService>();
+builder.Services.AddAuthorization(options =>
+{
+   
+    options.AddPolicy("Admins",
+        authBuilder =>
+        {
+            authBuilder.RequireRole(Role.Admin);
+        });
+    options.AddPolicy("Members",
+        authBuilder =>
+        {
+            authBuilder.RequireRole(Role.Member);
+        });
 
+});
 builder.Services.AddAuthentication(JwtBearerDefaults.AuthenticationScheme).AddJwtBearer(options =>
 {
+    options.SaveToken = true;
     options.TokenValidationParameters = new()
     {
         ValidateIssuer = true,

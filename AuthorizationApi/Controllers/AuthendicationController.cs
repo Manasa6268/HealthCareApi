@@ -31,7 +31,7 @@ namespace AuthorizationApi.Controllers
         public ActionResult<string> Validation([FromBody] UserData userdetails)
         {
             string result = string.Empty;
-            List<UserDetails> user = _UserTokenService.UserValidation(userdetails.UserName, userdetails.Password);
+            List<MemberDetails> user = _UserTokenService.UserValidation(userdetails.UserName, userdetails.Password);
             if (user == null)
             {
                 return Unauthorized();

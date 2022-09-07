@@ -13,26 +13,45 @@ namespace AdminApi.Services
         {
             _adminContext = adminContext;
         }
-        private static Random random = new Random();
-
-        public static string RandomString(int length)
-        {
-            const string chars = "ABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789";
-            return new string(Enumerable.Repeat(chars, length)
-                .Select(s => s[random.Next(s.Length)]).ToArray());
-        }
-        public string CreateAccount(UserDetails userDetails)
+        
+        public string CreateAccount(MemberDetails memberDetails)
         {
             try
             {
-                UserDetails user = new UserDetails(
+                string code = null;
+                if (memberDetails.UserType == "admin")
+                {
+                    code = "HCMP";
+                }
+                else
+                {
+                    code = "HCMM";
+                }
+                MemberDetails member = new MemberDetails
+                {
+                    
+                    Code = code,
+                    Id = 0,
+                    FirstName = memberDetails.FirstName,
+                    LastName = memberDetails.LastName,
+                    UserName = memberDetails.UserName,
+                    Password = memberDetails.Password,
+                    UserType = memberDetails.UserType,
+                    DOB = DateTime.Now,
+                    Address = memberDetails.Address,
+                    City = memberDetails.City,
+                    State = memberDetails.State,
+                    Email = memberDetails.Email,
+                    PhysicianName = memberDetails.PhysicianName,
+                    CreatedDate = DateTime.Now,
 
-                     RandomString(8),
-                     userDetails.UserName,
-                    userDetails.Password,
-                     userDetails.UserType
-                );
-                _adminContext.UserDetails.Add(user);
+                    ModifiedDate = DateTime.Now,
+                    ModifiedBy = memberDetails.ModifiedBy,
+
+
+                };
+                _adminContext.MemberDetails.Add(member);
+
                 _adminContext.SaveChanges();
                 return "Account Successfully Created";
             }
@@ -46,23 +65,16 @@ namespace AdminApi.Services
         {
             try
             {
-                string id = RandomString(8);
-                UserDetails user = new UserDetails(
 
-                    id,
-                    memberDetails.UserName,
-                   memberDetails.Password,
-                    "member"
-               );
-                _adminContext.UserDetails.Add(user);
-                
                 MemberDetails member = new MemberDetails
                 {
-                    MemberId = id,
+                    Code = "HCMM",
+                    Id = 0,
                     FirstName = memberDetails.FirstName,
                     LastName = memberDetails.LastName,
                     UserName = memberDetails.UserName,
                     Password = memberDetails.Password,
+                    UserType = "member",
                     DOB = DateTime.Now,
                     Address=memberDetails.Address,
                     City=memberDetails.City,    
@@ -70,12 +82,14 @@ namespace AdminApi.Services
                     Email=memberDetails.Email,
                     PhysicianName=memberDetails.PhysicianName,
                     CreatedDate=DateTime.Now,
-                    ModifiedDate= DateTime.Now,
+                    
+                ModifiedDate = DateTime.Now,
                     ModifiedBy=memberDetails.ModifiedBy,
 
 
                 };
                 _adminContext.MemberDetails.Add(member);
+                
                 _adminContext.SaveChanges();
                 return "Member Successfully added";
             }
@@ -91,7 +105,8 @@ namespace AdminApi.Services
             {
                 ClaimDetails claim = new ClaimDetails
                 {
-                    ClaimId = RandomString(8),
+                    Code = "HCMC",
+                    Id = 0,
                     MemberId = claimDetails.MemberId,
                     ClaimType=claimDetails.ClaimType,
                     ClaimDate=DateTime.Now.Date,

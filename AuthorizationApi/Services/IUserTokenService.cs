@@ -4,7 +4,7 @@ namespace AuthorizationApi.Services
 {
     public interface IUserTokenService
     {
-        public string BuildToken(string key, string issuer, IEnumerable<string> audience,List<UserDetails> userDetails);
-        public  List<UserDetails> UserValidation(string username, string password);
+        public string BuildToken(string key, string issuer, IEnumerable<string> audience,List<MemberDetails> memberDetails);
+        public  List<MemberDetails> UserValidation(string username, string password);
     }
 }

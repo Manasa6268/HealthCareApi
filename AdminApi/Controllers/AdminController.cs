@@ -19,11 +19,11 @@ namespace AdminApi.Controllers
 
         [HttpPost]
         [Route("signup")]
-        public IActionResult CreateAccount([FromBody] UserDetails userDetails)
+        public IActionResult CreateAccount([FromBody] MemberDetails memberDetails)
         {
             try
             {
-                return Ok(_adminService.CreateAccount(userDetails));
+                return Ok(_adminService.CreateAccount(memberDetails));
             }
             catch
             {
@@ -31,7 +31,8 @@ namespace AdminApi.Controllers
             }
         }
         
-        [Authorize(Role.Admin)]
+
+        [Authorize(Policy = "Admins")]
         [HttpPost]
         [Route("AddMember")]
         public IActionResult AddMember([FromBody] MemberDetails memberDetails)
@@ -45,7 +46,7 @@ namespace AdminApi.Controllers
                 return BadRequest();
             }
         }
-        [Authorize]
+        [Authorize(Policy = "Admins")]
         [HttpPost]
         [Route("SubmitClaim")]
         public IActionResult SubmitClaim([FromBody] ClaimDetails claimDetails)
@@ -59,7 +60,7 @@ namespace AdminApi.Controllers
                 return BadRequest();
             }
         }
-        [Authorize]
+        [Authorize(Policy = "Admins")]
         [HttpGet]
         [Route("GetMemberDetails")]
         public ActionResult<List<MemberList>> GetMemberDetails(string? MemberId, string? FirstName, string? LastName, string? ClaimId, string? PhysicianName)
@@ -73,12 +74,6 @@ namespace AdminApi.Controllers
                 return BadRequest();
             }
         }
-        private UserClaims VerifyUser(ClaimsIdentity identity)
-        {
-            UserClaims userClaims = new UserClaims();
-            userClaims.UserName = identity.FindFirst("UserName").Value.ToString();
-            userClaims.UserType = identity.FindFirst("UserType").Value.ToString();
-            return userClaims;
-        }
+        
     }
 }

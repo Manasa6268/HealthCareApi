@@ -15,28 +15,9 @@ namespace MemberApi.Controllers
         {
             _memberService = memberService;
         }
-        [Authorize(Role.Member)]
-        [HttpGet]
-        [Route("login")]
-        public ActionResult<string> memberlogin()
-        {
-            return Ok("login successfull");
-        }
-        [Authorize]
-        [HttpPost]
-        [Route("UpdateMember")]
-        public IActionResult UpdateMember([FromBody] MemberDetails memberDetails)
-        {
-            try
-            {
-                return Ok(_memberService.UpdateMember(memberDetails));
-            }
-            catch
-            {
-                return BadRequest();
-            }
-        }
-        [Authorize]
+        
+        
+        [Authorize(Policy = "Members")]
         [HttpPost]
         [Route("SubmitClaim")]
         public IActionResult SubmitClaim([FromBody] ClaimDetails claimDetails)
@@ -50,14 +31,28 @@ namespace MemberApi.Controllers
                 return BadRequest();
             }
         }
-        [Authorize]
+        [Authorize(Policy = "Members")]
         [HttpGet]
         [Route("fetchDetails")]
-        public ActionResult<MemberDetails> FetchDetails(string MemberId)
+        public ActionResult<MemberDetails> FetchDetails(int MemberId)
         {
             try
             {
                 return Ok(_memberService.FetchDetails(MemberId));
+            }
+            catch
+            {
+                return BadRequest();
+            }
+        }
+        [Authorize(Policy = "Members")]
+        [HttpGet]
+        [Route("fetchClaimDetails")]
+        public ActionResult<ClaimDetails> FetchClaimDetails(string MemberId)
+        {
+            try
+            {
+                return Ok(_memberService.FetchClaimDetails(MemberId));
             }
             catch
             {

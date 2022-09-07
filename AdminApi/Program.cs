@@ -1,4 +1,5 @@
 using AdminApi;
+using AdminApi.Models;
 using AdminApi.Services;
 
 using Microsoft.AspNetCore.Authentication.JwtBearer;
@@ -15,7 +16,21 @@ builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
 builder.Services.AddDbContext<DbAdminContext>();
 builder.Services.AddScoped<IAdminService, AdminService>();
+builder.Services.AddAuthorization(options =>
+{
 
+    options.AddPolicy("Admins",
+        authBuilder =>
+        {
+            authBuilder.RequireRole(Role.Admin);
+        });
+    options.AddPolicy("Members",
+        authBuilder =>
+        {
+            authBuilder.RequireRole(Role.Member);
+        });
+
+});
 builder.Services.AddAuthentication(JwtBearerDefaults.AuthenticationScheme).AddJwtBearer(options =>
 {
     options.TokenValidationParameters = new()

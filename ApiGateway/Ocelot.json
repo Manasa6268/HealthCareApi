@@ -36,6 +36,20 @@
         }
 
       ],
+      "DownstreamPathTemplate": "/api/Admin/login",
+      "DownstreamScheme": "https",
+      "RouteIsCaseSensitive": false,
+      "UpstreamHttpMethod": [ "GET" ],
+      "UpstreamPathTemplate": "/admin/login"
+    },
+    {
+      "DownstreamHostAndPorts": [
+        {
+          "Host": "localhost",
+          "Port": 7191
+        }
+
+      ],
       "DownstreamPathTemplate": "/api/Admin/AddMember",
       "DownstreamScheme": "https",
       "RouteIsCaseSensitive": false,
@@ -92,11 +106,11 @@
         }
 
       ],
-      "DownstreamPathTemplate": "/api/Member/UpdateMember",
+      "DownstreamPathTemplate": "/api/Member/FetchClaimDetails",
       "DownstreamScheme": "https",
       "RouteIsCaseSensitive": false,
-      "UpstreamHttpMethod": [ "POST" ],
-      "UpstreamPathTemplate": "/Member/updatemember"
+      "UpstreamHttpMethod": [ "GET" ],
+      "UpstreamPathTemplate": "/Member/fetchClaimDetails"
     },
     {
       "DownstreamHostAndPorts": [
