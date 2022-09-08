@@ -10,7 +10,9 @@ namespace AdminApi
         
         public DbSet<MemberDetails> MemberDetails { get; set; }
         public DbSet<ClaimDetails> ClaimDetails { get; set; }
+        public DbSet<StateDetails> stateDetails { get; set; }
 
+        public DbSet<UserTypes> userTypes { get; set; }
         public DbSet<MemberList> MemberList { get; set; }
         public DbAdminContext(IConfiguration configuration)
         {
@@ -29,7 +31,10 @@ namespace AdminApi
            
             modelBuilder.Entity<MemberDetails>().ToTable("tbl_Members");
             modelBuilder.Entity<ClaimDetails>().ToTable("tbl_Claims");
+            modelBuilder.Entity<StateDetails>().ToTable("state_list");
+            modelBuilder.Entity<UserTypes>().ToTable("tbl_UsersMaster");
         }
+
     }
     
 }

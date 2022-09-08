@@ -17,7 +17,7 @@ namespace MemberApi.Controllers
         }
         
         
-        [Authorize(Policy = "Members")]
+        [Authorize]
         [HttpPost]
         [Route("SubmitClaim")]
         public IActionResult SubmitClaim([FromBody] ClaimDetails claimDetails)
@@ -31,7 +31,7 @@ namespace MemberApi.Controllers
                 return BadRequest();
             }
         }
-        [Authorize(Policy = "Members")]
+        [Authorize]
         [HttpGet]
         [Route("fetchDetails")]
         public ActionResult<MemberDetails> FetchDetails(int MemberId)
@@ -45,7 +45,7 @@ namespace MemberApi.Controllers
                 return BadRequest();
             }
         }
-        [Authorize(Policy = "Members")]
+        [Authorize]
         [HttpGet]
         [Route("fetchClaimDetails")]
         public ActionResult<ClaimDetails> FetchClaimDetails(string MemberId)

@@ -43,7 +43,7 @@ namespace AuthorizationApi.Services
                 claims.Add(new Claim("sub", ((memberDetails[0].Code) + (memberDetails[0].Id)).ToString()));
                 claims.Add(new Claim("Id", (memberDetails[0].Id).ToString()));
                 claims.Add(new Claim("UserName", memberDetails[0].UserName));
-                claims.Add(new Claim(ClaimTypes.Role, memberDetails[0].UserType));
+                claims.Add(new Claim("Role", memberDetails[0].UserType));
                 
                 claims.AddRange(audience.Select(aud => new Claim(JwtRegisteredClaimNames.Aud, aud)));
 

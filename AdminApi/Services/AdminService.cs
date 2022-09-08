@@ -19,7 +19,7 @@ namespace AdminApi.Services
             try
             {
                 string code = null;
-                if (memberDetails.UserType == "admin")
+                if (memberDetails.UserType == "Admin")
                 {
                     code = "HCMP";
                 }
@@ -74,7 +74,7 @@ namespace AdminApi.Services
                     LastName = memberDetails.LastName,
                     UserName = memberDetails.UserName,
                     Password = memberDetails.Password,
-                    UserType = "member",
+                    UserType = "Member",
                     DOB = DateTime.Now,
                     Address=memberDetails.Address,
                     City=memberDetails.City,    
@@ -156,6 +156,25 @@ namespace AdminApi.Services
                 return list;
             }
 
+        }
+
+        public List<StateDetails> GetStates()
+        {
+            return _adminContext.stateDetails.ToList();
+        }
+
+        public List<UserTypes> GetUserTypes()
+        {
+            return _adminContext.userTypes.ToList();
+        }
+
+        public List<string> GetUserNames()
+        {
+            return _adminContext.MemberDetails.Select(member =>member.UserName).ToList();
+        }
+        public List<string> GetMails()
+        {
+            return _adminContext.MemberDetails.Select(member => member.Email).ToList();
         }
     }
 }

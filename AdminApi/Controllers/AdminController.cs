@@ -8,6 +8,7 @@ using System.Security.Claims;
 namespace AdminApi.Controllers
 {
     [Route("api/[controller]")]
+    [Produces("application/json")]
     [ApiController]
     public class AdminController : ControllerBase
     {
@@ -32,7 +33,7 @@ namespace AdminApi.Controllers
         }
         
 
-        [Authorize(Policy = "Admins")]
+        [Authorize]
         [HttpPost]
         [Route("AddMember")]
         public IActionResult AddMember([FromBody] MemberDetails memberDetails)
@@ -46,7 +47,7 @@ namespace AdminApi.Controllers
                 return BadRequest();
             }
         }
-        [Authorize(Policy = "Admins")]
+        [Authorize]
         [HttpPost]
         [Route("SubmitClaim")]
         public IActionResult SubmitClaim([FromBody] ClaimDetails claimDetails)
@@ -60,7 +61,7 @@ namespace AdminApi.Controllers
                 return BadRequest();
             }
         }
-        [Authorize(Policy = "Admins")]
+        [Authorize]
         [HttpGet]
         [Route("GetMemberDetails")]
         public ActionResult<List<MemberList>> GetMemberDetails(string? MemberId, string? FirstName, string? LastName, string? ClaimId, string? PhysicianName)
@@ -75,5 +76,59 @@ namespace AdminApi.Controllers
             }
         }
         
+        [HttpGet]
+        [Route("states")]
+        public ActionResult<List<StateDetails>> GetStates()
+        {
+            try
+            {
+                return Ok(_adminService.GetStates());
+            }
+            catch
+            {
+                return BadRequest();
+            }
+        }
+        [HttpGet]
+        [Route("usertypes")]
+        public ActionResult<List<UserTypes>> GetUserTypes()
+        {
+            try
+            {
+                return Ok(_adminService.GetUserTypes());
+            }
+            catch
+            {
+                return BadRequest();
+            }
+        }
+        [HttpGet]
+        [Route("usernames")]
+        public ActionResult<List<string>> GetUserNames()
+        {
+            try
+            { 
+            
+                return Ok(_adminService.GetUserNames());
+            }
+            catch
+            {
+                return BadRequest();
+            }
+        }
+        [HttpGet]
+        [Route("mails")]
+        public ActionResult<List<string>> GetMails()
+        {
+            try
+            {
+
+                return Ok(_adminService.GetMails());
+            }
+            catch
+            {
+                return BadRequest();
+            }
+        }
     }
 }

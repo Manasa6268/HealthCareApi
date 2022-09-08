@@ -36,6 +36,62 @@
         }
 
       ],
+      "DownstreamPathTemplate": "/api/Admin/states",
+      "DownstreamScheme": "https",
+      "RouteIsCaseSensitive": false,
+      "UpstreamHttpMethod": [ "GET" ],
+      "UpstreamPathTemplate": "/states"
+    },
+    {
+      "DownstreamHostAndPorts": [
+        {
+          "Host": "localhost",
+          "Port": 7191
+        }
+
+      ],
+      "DownstreamPathTemplate": "/api/Admin/usertypes",
+      "DownstreamScheme": "https",
+      "RouteIsCaseSensitive": false,
+      "UpstreamHttpMethod": [ "GET" ],
+      "UpstreamPathTemplate": "/usertypes"
+    },
+    {
+      "DownstreamHostAndPorts": [
+        {
+          "Host": "localhost",
+          "Port": 7191
+        }
+
+      ],
+      "DownstreamPathTemplate": "/api/Admin/mails",
+      "DownstreamScheme": "https",
+      "RouteIsCaseSensitive": false,
+      "UpstreamHttpMethod": [ "GET" ],
+      "UpstreamPathTemplate": "/getmails"
+    },
+    {
+      "DownstreamHostAndPorts": [
+        {
+          "Host": "localhost",
+          "Port": 7191
+        }
+
+      ],
+      "DownstreamPathTemplate": "/api/Admin/usernames",
+      "DownstreamScheme": "https",
+      "RouteIsCaseSensitive": false,
+      "UpstreamHttpMethod": [ "GET" ],
+      "UpstreamPathTemplate": "/usernames"
+    },
+    {
+      "DownstreamHostAndPorts": [
+        {
+          "Host": "localhost",
+          "Port": 7191
+        }
+
+      ],
       "DownstreamPathTemplate": "/api/Admin/login",
       "DownstreamScheme": "https",
       "RouteIsCaseSensitive": false,

@@ -74,5 +74,18 @@ namespace AdminApi.Models
         public const string Admin = "admin";
         public const string Member = "member";
     }
+    public class StateDetails
+    {
+        [Key]
+        public int id { get; set; }
+        public string state { get; set; }
+    }
+    public class UserTypes
+    {
+        [Key]
+        public int Id { get; set; }
+        public string UserType { get; set; }
+    }
+
 
 }
