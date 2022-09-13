@@ -9,8 +9,11 @@ namespace AdminApi.Services
         List<MemberList> GetMemberDetails(string? memberId, string? firstName, string? lastName, string? claimId, string? physicianName);
         List<StateDetails> GetStates();
         List<string> GetUserNames();
-        List<string> GetMails();
+        List<PhysicianDetails> GetPhysicianNames();
+
+        List<string> GetEmails();
         List<UserTypes> GetUserTypes();
         public string SubmitClaim(ClaimDetails claimDetails);
+        public string AssignPhysician(PhysicianAssign PhysicianAssign);
     }
 }

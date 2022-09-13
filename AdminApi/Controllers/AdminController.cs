@@ -123,7 +123,35 @@ namespace AdminApi.Controllers
             try
             {
 
-                return Ok(_adminService.GetMails());
+                return Ok(_adminService.GetEmails());
+            }
+            catch
+            {
+                return BadRequest();
+            }
+        }
+        [HttpGet]
+        [Route("phyisiciannames")]
+        public ActionResult<List<PhysicianDetails>> GetPhysicianName()
+        {
+            try
+            {
+
+                return Ok(_adminService.GetPhysicianNames());
+            }
+            catch
+            {
+                return BadRequest();
+            }
+        }
+        [HttpPost]
+        [Route("AssignPhysician")]
+        public ActionResult<string> AssignPhysician([FromBody] PhysicianAssign PhysicianAssign)
+        {
+            try
+            {
+
+                return Ok(_adminService.AssignPhysician(PhysicianAssign));
             }
             catch
             {

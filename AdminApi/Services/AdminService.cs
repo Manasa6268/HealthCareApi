@@ -1,8 +1,11 @@
 ﻿using AdminApi.Models;
 using Microsoft.Data.SqlClient;
 using Microsoft.EntityFrameworkCore;
+using System.Collections.Generic;
 using System.Net;
 using System.Security.Claims;
+using EFCore.BulkExtensions;
+using Microsoft.AspNetCore.Mvc;
 
 namespace AdminApi.Services
 {
@@ -37,15 +40,14 @@ namespace AdminApi.Services
                     UserName = memberDetails.UserName,
                     Password = memberDetails.Password,
                     UserType = memberDetails.UserType,
-                    DOB = DateTime.Now,
+                    DOB =memberDetails.DOB,
                     Address = memberDetails.Address,
                     City = memberDetails.City,
                     State = memberDetails.State,
                     Email = memberDetails.Email,
                     PhysicianName = memberDetails.PhysicianName,
-                    CreatedDate = DateTime.Now,
-
-                    ModifiedDate = DateTime.Now,
+                    CreatedDate = memberDetails.CreatedDate,
+                    ModifiedDate = memberDetails.ModifiedDate,
                     ModifiedBy = memberDetails.ModifiedBy,
 
 
@@ -103,21 +105,22 @@ namespace AdminApi.Services
         {
             try
             {
-                ClaimDetails claim = new ClaimDetails
+                List<ClaimDetails> claims= new List<ClaimDetails>();
+                claims.Add(new ClaimDetails()
                 {
                     Code = "HCMC",
                     Id = 0,
                     MemberId = claimDetails.MemberId,
-                    ClaimType=claimDetails.ClaimType,
-                    ClaimDate=DateTime.Now.Date,
-                    ClaimAmount =claimDetails.ClaimAmount,
-                   Remarks= claimDetails.Remarks,
-                   CreatedBy=claimDetails.CreatedBy,
+                    ClaimType = claimDetails.ClaimType,
+                    ClaimDate = claimDetails.ClaimDate,
+                    ClaimAmount = claimDetails.ClaimAmount,
+                    Remarks = claimDetails.Remarks,
+                    CreatedBy = claimDetails.CreatedBy,
+                    
 
 
-
-                };
-                _adminContext.ClaimDetails.Add(claim);
+                });
+                _adminContext.BulkInsert(claims);
                 _adminContext.SaveChanges();
                 return "Claim Successfully Submitted";
             }
@@ -127,34 +130,42 @@ namespace AdminApi.Services
 
             }
         }
+       
         
         public List<MemberList> GetMemberDetails(string? MemberId, string? FirstName, string? LastName, string? ClaimId,string? PhysicianName)
         {
 
-            string sql = "EXEC [dbo].[GetMemberDetails] @MemberId,@FirstName,@LastName,@ClaimId,@PhysicianName";
+            string sql = "EXEC [dbo].[GetMemberDetails] @MemberId,@FirstName,@LastName,@PhysicianName,@ClaimId";
             List<SqlParameter> parms = new List<SqlParameter>
     {
         // Create parameter(s)    
-        new SqlParameter { ParameterName = "@MemberId", Value = MemberId==null ? "" : MemberId},
-         new SqlParameter { ParameterName = "@FirstName", Value = FirstName==null ? "" : FirstName },
-          new SqlParameter { ParameterName = "@LastName", Value = LastName==null ? "" : LastName },
-           new SqlParameter { ParameterName = "@ClaimId", Value = ClaimId==null ? "" : ClaimId },
-            new SqlParameter { ParameterName = "@PhysicianName", Value = PhysicianName==null ? "" : PhysicianName },
+        new SqlParameter { ParameterName = "@MemberId", Value = MemberId==null ? " " : MemberId},
+         new SqlParameter { ParameterName = "@FirstName", Value = FirstName==null ? " " : FirstName },
+          new SqlParameter { ParameterName = "@LastName", Value = LastName==null ? " " : LastName },
+          new SqlParameter { ParameterName = "@PhysicianName", Value = PhysicianName==null ? " " : PhysicianName },
+           new SqlParameter { ParameterName = "@ClaimId", Value = ClaimId==null ? " " : ClaimId },
+            
 
 
     };
-
-            List<MemberList> list = _adminContext.MemberList.FromSqlRaw<MemberList>(sql, parms.ToArray()).ToList();
-
-
-            if (list.Count == 0)
+            if (parms.Count != 0)
             {
-                return null;
+                List<MemberList> list = _adminContext.MemberList.FromSqlRaw<MemberList>(sql, parms.ToArray()).ToList();
+                if (list.Count == 0)
+                {
+                    return null;
+                }
+                else
+                {
+                    return list;
+                }
             }
             else
             {
-                return list;
+                return null;
             }
+
+
 
         }
 
@@ -172,9 +183,34 @@ namespace AdminApi.Services
         {
             return _adminContext.MemberDetails.Select(member =>member.UserName).ToList();
         }
-        public List<string> GetMails()
+        public List<string> GetEmails()
         {
             return _adminContext.MemberDetails.Select(member => member.Email).ToList();
+        }
+
+        public List<PhysicianDetails> GetPhysicianNames()
+        {
+            return _adminContext.PhysicianDetails.ToList();
+        }
+
+        public string AssignPhysician(PhysicianAssign PhysicianAssign)
+        {
+            
+            int a = Convert.ToInt32(PhysicianAssign.MemberId.Substring(4));
+            var member = _adminContext.MemberDetails.Find(a);
+            if(member !=null)
+            {
+                member.PhysicianName = PhysicianAssign.PhysicianName;
+                member.ModifiedDate = DateTime.Now.Date;
+                member.ModifiedBy = PhysicianAssign.AdminId;
+                _adminContext.MemberDetails.Update(member);
+                _adminContext.SaveChanges();
+                return "Physician Assigned Successfully";
+            }
+            else
+            {
+                return "Member Not found";
+            }
         }
     }
 }

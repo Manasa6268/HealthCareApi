@@ -1,4 +1,5 @@
-﻿using MemberApi.Models;
+﻿using EFCore.BulkExtensions;
+using MemberApi.Models;
 using System.Net;
 
 namespace MemberApi.Services
@@ -10,27 +11,28 @@ namespace MemberApi.Services
         {
             _memberContext = memberContext;
         }
-       
-        
+
+
         public string SubmitClaim(ClaimDetails claimDetails)
         {
             try
             {
-                ClaimDetails claim = new ClaimDetails
+                List<ClaimDetails> claims = new List<ClaimDetails>();
+                claims.Add(new ClaimDetails()
                 {
                     Code = "HCMC",
-                    Id=0,
+                    Id = 0,
                     MemberId = claimDetails.MemberId,
                     ClaimType = claimDetails.ClaimType,
-                    ClaimDate = DateTime.Now.Date,
+                    ClaimDate = claimDetails.ClaimDate,
                     ClaimAmount = claimDetails.ClaimAmount,
                     Remarks = claimDetails.Remarks,
                     CreatedBy = claimDetails.CreatedBy,
 
 
 
-                };
-                _memberContext.ClaimDetails.Add(claim);
+                });
+                _memberContext.BulkInsert(claims);
                 _memberContext.SaveChanges();
                 return "Claim Successfully Submitted";
             }
@@ -43,11 +45,11 @@ namespace MemberApi.Services
 
         public MemberDetails FetchDetails(int Id)
         {
-           return _memberContext.MemberDetails.Where(member => member.Id == Id).FirstOrDefault();
+           return _memberContext.MemberDetails.Where(member => member.Id == Id).First();
         }
-        public ClaimDetails FetchClaimDetails(string memberID)
+        public List<ClaimDetails> FetchClaimDetails(string memberID)
         {
-            return _memberContext.ClaimDetails.Where(claim => claim.MemberId == memberID).FirstOrDefault();
+            return _memberContext.ClaimDetails.Where(claim => claim.MemberId == memberID).ToList();
         }
     }
 }

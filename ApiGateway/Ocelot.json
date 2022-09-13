@@ -36,6 +36,20 @@
         }
 
       ],
+      "DownstreamPathTemplate": "/api/Admin/AssignPhysician",
+      "DownstreamScheme": "https",
+      "RouteIsCaseSensitive": false,
+      "UpstreamHttpMethod": [ "POST" ],
+      "UpstreamPathTemplate": "/admin/assignphysician"
+    },
+    {
+      "DownstreamHostAndPorts": [
+        {
+          "Host": "localhost",
+          "Port": 7191
+        }
+
+      ],
       "DownstreamPathTemplate": "/api/Admin/states",
       "DownstreamScheme": "https",
       "RouteIsCaseSensitive": false,
@@ -83,6 +97,20 @@
       "RouteIsCaseSensitive": false,
       "UpstreamHttpMethod": [ "GET" ],
       "UpstreamPathTemplate": "/usernames"
+    },
+    {
+      "DownstreamHostAndPorts": [
+        {
+          "Host": "localhost",
+          "Port": 7191
+        }
+
+      ],
+      "DownstreamPathTemplate": "/api/Admin/phyisiciannames",
+      "DownstreamScheme": "https",
+      "RouteIsCaseSensitive": false,
+      "UpstreamHttpMethod": [ "GET" ],
+      "UpstreamPathTemplate": "/physiciannames"
     },
     {
       "DownstreamHostAndPorts": [

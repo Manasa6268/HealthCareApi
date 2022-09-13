@@ -80,6 +80,21 @@ namespace AdminApi.Models
         public int id { get; set; }
         public string state { get; set; }
     }
+    public class PhysicianDetails
+    {
+        [Key]
+        public int Id { get; set; }
+        public string PhysicianName { get; set; }
+        public string PhysicianState { get; set; }
+    }
+    public class PhysicianAssign
+    {
+        public string MemberId { get; set; }
+        public string PhysicianName { get; set; }
+
+        public string AdminId { get; set; }
+    }
+
     public class UserTypes
     {
         [Key]

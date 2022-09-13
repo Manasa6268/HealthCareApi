@@ -7,6 +7,7 @@ using Microsoft.AspNetCore.Mvc;
 namespace MemberApi.Controllers
 {
     [Route("api/[controller]")]
+    [Produces("application/json")]
     [ApiController]
     public class MemberController : ControllerBase
     {
@@ -48,7 +49,7 @@ namespace MemberApi.Controllers
         [Authorize]
         [HttpGet]
         [Route("fetchClaimDetails")]
-        public ActionResult<ClaimDetails> FetchClaimDetails(string MemberId)
+        public ActionResult<List<ClaimDetails>> FetchClaimDetails(string MemberId)
         {
             try
             {

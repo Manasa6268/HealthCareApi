@@ -14,6 +14,8 @@ namespace AdminApi
 
         public DbSet<UserTypes> userTypes { get; set; }
         public DbSet<MemberList> MemberList { get; set; }
+
+        public DbSet<PhysicianDetails> PhysicianDetails { get; set; }
         public DbAdminContext(IConfiguration configuration)
         {
             _configuration = configuration;
@@ -33,6 +35,7 @@ namespace AdminApi
             modelBuilder.Entity<ClaimDetails>().ToTable("tbl_Claims");
             modelBuilder.Entity<StateDetails>().ToTable("state_list");
             modelBuilder.Entity<UserTypes>().ToTable("tbl_UsersMaster");
+            modelBuilder.Entity<PhysicianDetails>().ToTable("tbl_Physicians");
         }
 
     }

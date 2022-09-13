@@ -5,7 +5,7 @@ namespace MemberApi.Services
     public interface IMemberService
     {
         MemberDetails FetchDetails(int Id);
-        ClaimDetails FetchClaimDetails(string memberID);
+        List<ClaimDetails> FetchClaimDetails(string memberID);
         string SubmitClaim(ClaimDetails claimDetails);
         
     }
