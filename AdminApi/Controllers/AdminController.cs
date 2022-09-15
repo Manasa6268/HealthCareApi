@@ -7,7 +7,6 @@ using System.Security.Claims;
 
 namespace AdminApi.Controllers
 {
-    [Route("api/[controller]")]
     [Produces("application/json")]
     [ApiController]
     public class AdminController : ControllerBase
@@ -20,20 +19,21 @@ namespace AdminApi.Controllers
 
         [HttpPost]
         [Route("signup")]
-        public IActionResult CreateAccount([FromBody] MemberDetails memberDetails)
+        public string CreateAccount([FromBody] MemberDetails memberDetails)
         {
             try
             {
-                return Ok(_adminService.CreateAccount(memberDetails));
+                return _adminService.CreateAccount(memberDetails);
             }
             catch
             {
-                return BadRequest();
+                return "User Cannot be Created";
+
             }
         }
         
 
-        [Authorize]
+       // [Authorize]
         [HttpPost]
         [Route("AddMember")]
         public IActionResult AddMember([FromBody] MemberDetails memberDetails)
@@ -47,32 +47,33 @@ namespace AdminApi.Controllers
                 return BadRequest();
             }
         }
-        [Authorize]
-        [HttpPost]
-        [Route("SubmitClaim")]
-        public IActionResult SubmitClaim([FromBody] ClaimDetails claimDetails)
-        {
-            try
-            {
-                return Ok(_adminService.SubmitClaim(claimDetails));
-            }
-            catch
-            {
-                return BadRequest();
-            }
-        }
-        [Authorize]
+        //[Authorize]
+        //[HttpPost]
+        //[Route("SubmitClaim")]
+        //public string SubmitClaim([FromBody] ClaimDetails claimDetails)
+        //{
+        //    try
+        //    {
+        //        return _adminService.SubmitClaim(claimDetails);
+        //    }
+        //    catch
+        //    {
+        //        throw new Exception("Claim Cannot be Submitted");
+        //    }
+        //}
+       // [Authorize]
         [HttpGet]
         [Route("GetMemberDetails")]
-        public ActionResult<List<MemberList>> GetMemberDetails(string? MemberId, string? FirstName, string? LastName, string? ClaimId, string? PhysicianName)
+        public List<MemberList> GetMemberDetails(string? MemberId, string? FirstName, string? LastName, string? ClaimId, string? PhysicianName)
         {
             try
             {
-                return Ok(_adminService.GetMemberDetails(MemberId,FirstName,LastName,ClaimId,PhysicianName));
+                return _adminService.GetMemberDetails(MemberId,FirstName,LastName,ClaimId,PhysicianName);
             }
-            catch
+            catch 
             {
-                return BadRequest();
+                throw new Exception("No Members found");
+
             }
         }
         
@@ -144,18 +145,19 @@ namespace AdminApi.Controllers
                 return BadRequest();
             }
         }
+        [Authorize]
         [HttpPost]
         [Route("AssignPhysician")]
-        public ActionResult<string> AssignPhysician([FromBody] PhysicianAssign PhysicianAssign)
+        public string AssignPhysician([FromBody] PhysicianAssign PhysicianAssign)
         {
             try
             {
 
-                return Ok(_adminService.AssignPhysician(PhysicianAssign));
+                return _adminService.AssignPhysician(PhysicianAssign);
             }
             catch
             {
-                return BadRequest();
+                return "Physician cannot be Assigned";
             }
         }
     }

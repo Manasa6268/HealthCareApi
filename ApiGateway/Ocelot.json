@@ -8,11 +8,11 @@
         }
 
       ],
-      "DownstreamPathTemplate": "/api/Authendication",
+      "DownstreamPathTemplate": "/gettoken",
       "DownstreamScheme": "https",
       "RouteIsCaseSensitive": false,
       "UpstreamHttpMethod": [ "POST" ],
-      "UpstreamPathTemplate": "/api/GetToken"
+      "UpstreamPathTemplate": "/auth/gettoken"
     },
     {
       "DownstreamHostAndPorts": [
@@ -22,7 +22,7 @@
         }
 
       ],
-      "DownstreamPathTemplate": "/api/Admin/signup",
+      "DownstreamPathTemplate": "/signup",
       "DownstreamScheme": "https",
       "RouteIsCaseSensitive": false,
       "UpstreamHttpMethod": [ "POST" ],
@@ -36,7 +36,7 @@
         }
 
       ],
-      "DownstreamPathTemplate": "/api/Admin/AssignPhysician",
+      "DownstreamPathTemplate": "/AssignPhysician",
       "DownstreamScheme": "https",
       "RouteIsCaseSensitive": false,
       "UpstreamHttpMethod": [ "POST" ],
@@ -50,11 +50,11 @@
         }
 
       ],
-      "DownstreamPathTemplate": "/api/Admin/states",
+      "DownstreamPathTemplate": "/states",
       "DownstreamScheme": "https",
       "RouteIsCaseSensitive": false,
       "UpstreamHttpMethod": [ "GET" ],
-      "UpstreamPathTemplate": "/states"
+      "UpstreamPathTemplate": "/admin/states"
     },
     {
       "DownstreamHostAndPorts": [
@@ -78,11 +78,11 @@
         }
 
       ],
-      "DownstreamPathTemplate": "/api/Admin/mails",
+      "DownstreamPathTemplate": "/mails",
       "DownstreamScheme": "https",
       "RouteIsCaseSensitive": false,
       "UpstreamHttpMethod": [ "GET" ],
-      "UpstreamPathTemplate": "/getmails"
+      "UpstreamPathTemplate": "/admin/mails"
     },
     {
       "DownstreamHostAndPorts": [
@@ -92,11 +92,11 @@
         }
 
       ],
-      "DownstreamPathTemplate": "/api/Admin/usernames",
+      "DownstreamPathTemplate": "/usernames",
       "DownstreamScheme": "https",
       "RouteIsCaseSensitive": false,
       "UpstreamHttpMethod": [ "GET" ],
-      "UpstreamPathTemplate": "/usernames"
+      "UpstreamPathTemplate": "/admin/usernames"
     },
     {
       "DownstreamHostAndPorts": [
@@ -106,12 +106,13 @@
         }
 
       ],
-      "DownstreamPathTemplate": "/api/Admin/phyisiciannames",
+      "DownstreamPathTemplate": "/phyisiciannames",
       "DownstreamScheme": "https",
       "RouteIsCaseSensitive": false,
       "UpstreamHttpMethod": [ "GET" ],
-      "UpstreamPathTemplate": "/physiciannames"
+      "UpstreamPathTemplate": "/admin/phyisiciannames"
     },
+
     {
       "DownstreamHostAndPorts": [
         {
@@ -120,25 +121,11 @@
         }
 
       ],
-      "DownstreamPathTemplate": "/api/Admin/login",
-      "DownstreamScheme": "https",
-      "RouteIsCaseSensitive": false,
-      "UpstreamHttpMethod": [ "GET" ],
-      "UpstreamPathTemplate": "/admin/login"
-    },
-    {
-      "DownstreamHostAndPorts": [
-        {
-          "Host": "localhost",
-          "Port": 7191
-        }
-
-      ],
-      "DownstreamPathTemplate": "/api/Admin/AddMember",
+      "DownstreamPathTemplate": "/AddMember",
       "DownstreamScheme": "https",
       "RouteIsCaseSensitive": false,
       "UpstreamHttpMethod": [ "POST" ],
-      "UpstreamPathTemplate": "/admin/addmember"
+      "UpstreamPathTemplate": "/admin/AddMember"
     },
     {
       "DownstreamHostAndPorts": [
@@ -148,11 +135,11 @@
         }
 
       ],
-      "DownstreamPathTemplate": "/api/Admin/SubmitClaim",
+      "DownstreamPathTemplate": "/SubmitClaim",
       "DownstreamScheme": "https",
       "RouteIsCaseSensitive": false,
       "UpstreamHttpMethod": [ "POST" ],
-      "UpstreamPathTemplate": "/admin/submitclaim"
+      "UpstreamPathTemplate": "/admin/SubmitClaim"
     },
     {
       "DownstreamHostAndPorts": [
@@ -162,11 +149,26 @@
         }
 
       ],
-      "DownstreamPathTemplate": "/api/Admin/GetMemberDetails",
+      "DownstreamPathTemplate": "/GetMemberDetails",
       "DownstreamScheme": "https",
       "RouteIsCaseSensitive": false,
       "UpstreamHttpMethod": [ "GET" ],
-      "UpstreamPathTemplate": "/admin/getmembers"
+      "UpstreamPathTemplate": "/admin/GetMemberDetails"
+    },
+
+    {
+      "DownstreamHostAndPorts": [
+        {
+          "Host": "localhost",
+          "Port": 7057
+        }
+
+      ],
+      "DownstreamPathTemplate": "/fetchClaimDetails",
+      "DownstreamScheme": "https",
+      "RouteIsCaseSensitive": false,
+      "UpstreamHttpMethod": [ "GET" ],
+      "UpstreamPathTemplate": "/member/fetchClaimDetails"
     },
     {
       "DownstreamHostAndPorts": [
@@ -176,39 +178,11 @@
         }
 
       ],
-      "DownstreamPathTemplate": "/api/Member/login",
-      "DownstreamScheme": "https",
-      "RouteIsCaseSensitive": false,
-      "UpstreamHttpMethod": [ "GET" ],
-      "UpstreamPathTemplate": "/Member/login"
-    },
-    {
-      "DownstreamHostAndPorts": [
-        {
-          "Host": "localhost",
-          "Port": 7057
-        }
-
-      ],
-      "DownstreamPathTemplate": "/api/Member/FetchClaimDetails",
-      "DownstreamScheme": "https",
-      "RouteIsCaseSensitive": false,
-      "UpstreamHttpMethod": [ "GET" ],
-      "UpstreamPathTemplate": "/Member/fetchClaimDetails"
-    },
-    {
-      "DownstreamHostAndPorts": [
-        {
-          "Host": "localhost",
-          "Port": 7057
-        }
-
-      ],
-      "DownstreamPathTemplate": "/api/Member/SubmitClaim",
+      "DownstreamPathTemplate": "/SubmitClaim",
       "DownstreamScheme": "https",
       "RouteIsCaseSensitive": false,
       "UpstreamHttpMethod": [ "POST" ],
-      "UpstreamPathTemplate": "/Member/submitclaim"
+      "UpstreamPathTemplate": "/member/SubmitClaim"
     },
     {
       "DownstreamHostAndPorts": [
@@ -218,11 +192,11 @@
         }
 
       ],
-      "DownstreamPathTemplate": "/api/Member/fetchDetails",
+      "DownstreamPathTemplate": "/fetchDetails",
       "DownstreamScheme": "https",
       "RouteIsCaseSensitive": false,
       "UpstreamHttpMethod": [ "GET" ],
-      "UpstreamPathTemplate": "/Member/fetchdetails"
+      "UpstreamPathTemplate": "/member/fetchDetails"
     }
 
 

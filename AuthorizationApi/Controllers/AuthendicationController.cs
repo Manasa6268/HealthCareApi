@@ -8,7 +8,7 @@ using System.Text;
 
 namespace AuthorizationApi.Controllers
 {
-    [Route("api/[controller]")]
+    
     [Produces("application/json")]
     [ApiController]
 
@@ -28,6 +28,7 @@ namespace AuthorizationApi.Controllers
         /// <param name="userdetails">The userdetails.</param>
         /// <returns>ActionResult&lt;System.String&gt;.</returns>
         [HttpPost]
+        [Route("gettoken")]
         public ActionResult<string> Validation([FromBody] UserData userdetails)
         {
             string result = string.Empty;
