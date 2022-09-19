@@ -1,17 +1,10 @@
 ﻿using AuthorizationApi.Models;
 using AuthorizationApi.Services;
 using Microsoft.AspNetCore.Mvc;
-using Microsoft.IdentityModel.Tokens;
-using System.IdentityModel.Tokens.Jwt;
-using System.Security.Claims;
-using System.Text;
-
 namespace AuthorizationApi.Controllers
 {
-    
     [Produces("application/json")]
     [ApiController]
-
     public class AuthendicationController : ControllerBase
     {
         private readonly IConfiguration _configuration;
@@ -37,7 +30,6 @@ namespace AuthorizationApi.Controllers
             {
                 return Unauthorized();
             }
-            
                 result = _UserTokenService.BuildToken(_configuration["Jwt:Key"],
                                         _configuration["Jwt:Issuer"],
                                         new[]
@@ -47,11 +39,7 @@ namespace AuthorizationApi.Controllers
                                             _configuration["Jwt:Aud3"]
                                         },
                                         user);
-
-            
-
             return Ok(result);
         }
-        
     }
 }

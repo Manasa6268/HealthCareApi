@@ -1,10 +1,7 @@
 ﻿using AdminApi.Models;
 using AdminApi.Services;
 using Microsoft.AspNetCore.Authorization;
-using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
-using System.Security.Claims;
-
 namespace AdminApi.Controllers
 {
     [Produces("application/json")]
@@ -16,7 +13,6 @@ namespace AdminApi.Controllers
         {
             _adminService = adminService;
         }
-
         [HttpPost]
         [Route("signup")]
         public string CreateAccount([FromBody] MemberDetails memberDetails)
@@ -31,37 +27,7 @@ namespace AdminApi.Controllers
 
             }
         }
-        
-
-       // [Authorize]
-        [HttpPost]
-        [Route("AddMember")]
-        public IActionResult AddMember([FromBody] MemberDetails memberDetails)
-        {
-            try
-            {
-                return Ok(_adminService.AddMember(memberDetails));
-            }
-            catch
-            {
-                return BadRequest();
-            }
-        }
-        //[Authorize]
-        //[HttpPost]
-        //[Route("SubmitClaim")]
-        //public string SubmitClaim([FromBody] ClaimDetails claimDetails)
-        //{
-        //    try
-        //    {
-        //        return _adminService.SubmitClaim(claimDetails);
-        //    }
-        //    catch
-        //    {
-        //        throw new Exception("Claim Cannot be Submitted");
-        //    }
-        //}
-       // [Authorize]
+        [Authorize]
         [HttpGet]
         [Route("GetMemberDetails")]
         public List<MemberList> GetMemberDetails(string? MemberId, string? FirstName, string? LastName, string? ClaimId, string? PhysicianName)
@@ -76,73 +42,71 @@ namespace AdminApi.Controllers
 
             }
         }
-        
         [HttpGet]
         [Route("states")]
-        public ActionResult<List<StateDetails>> GetStates()
+        public List<StateDetails> GetStates()
         {
             try
             {
-                return Ok(_adminService.GetStates());
+                return _adminService.GetStates();
             }
             catch
             {
-                return BadRequest();
+                return null;
             }
         }
         [HttpGet]
         [Route("usertypes")]
-        public ActionResult<List<UserTypes>> GetUserTypes()
+        public List<UserTypes> GetUserTypes()
         {
             try
             {
-                return Ok(_adminService.GetUserTypes());
+                return _adminService.GetUserTypes();
             }
             catch
             {
-                return BadRequest();
+                return null;
             }
         }
         [HttpGet]
         [Route("usernames")]
-        public ActionResult<List<string>> GetUserNames()
+        public List<string> GetUserNames()
         {
             try
             { 
             
-                return Ok(_adminService.GetUserNames());
+                return _adminService.GetUserNames();
             }
             catch
             {
-                return BadRequest();
+                return null;
             }
         }
         [HttpGet]
         [Route("mails")]
-        public ActionResult<List<string>> GetMails()
+        public List<string> GetMails()
         {
             try
             {
-
-                return Ok(_adminService.GetEmails());
+                return _adminService.GetEmails();
             }
             catch
             {
-                return BadRequest();
+                return null;
             }
         }
         [HttpGet]
         [Route("phyisiciannames")]
-        public ActionResult<List<PhysicianDetails>> GetPhysicianName()
+        public List<PhysicianDetails> GetPhysicianName()
         {
             try
             {
 
-                return Ok(_adminService.GetPhysicianNames());
+                return _adminService.GetPhysicianNames();
             }
             catch
             {
-                return BadRequest();
+                return null;
             }
         }
         [Authorize]

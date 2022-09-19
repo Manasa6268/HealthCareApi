@@ -1,10 +1,7 @@
 using AuthorizationApi;
 using AuthorizationApi.Services;
-
 var builder = WebApplication.CreateBuilder(args);
-
-// Add services to the container.
-
+// Add services to the container;
 builder.Services.AddControllers();
 // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
 builder.Services.AddEndpointsApiExplorer();
@@ -19,7 +16,6 @@ builder.Services.AddCors((setup) =>
     });
 });
 var app = builder.Build();
-
 // Configure the HTTP request pipeline.
 if (app.Environment.IsDevelopment())
 {
@@ -27,11 +23,8 @@ if (app.Environment.IsDevelopment())
     app.UseSwaggerUI();
 }
 app.UseCors("default");
-
 app.UseHttpsRedirection();
 app.UseAuthentication();
 app.UseAuthorization();
-
 app.MapControllers();
-
 app.Run();

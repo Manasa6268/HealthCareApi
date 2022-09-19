@@ -1,7 +1,5 @@
 ﻿using EFCore.BulkExtensions;
 using MemberApi.Models;
-using System.Net;
-
 namespace MemberApi.Services
 {
     public class MemberService : IMemberService
@@ -11,8 +9,6 @@ namespace MemberApi.Services
         {
             _memberContext = memberContext;
         }
-
-
         public string SubmitClaim(ClaimDetails claimDetails)
         {
             try
@@ -42,7 +38,6 @@ namespace MemberApi.Services
 
             }
         }
-
         public MemberDetails FetchDetails(int Id)
         {
            return _memberContext.MemberDetails.Where(member => member.Id == Id).First();

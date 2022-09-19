@@ -1,5 +1,4 @@
 ﻿using MemberApi.Models;
-
 namespace MemberApi.Services
 {
     public interface IMemberService
@@ -7,6 +6,5 @@ namespace MemberApi.Services
         MemberDetails FetchDetails(int Id);
         List<ClaimDetails> FetchClaimDetails(string memberID);
         string SubmitClaim(ClaimDetails claimDetails);
-        
     }
 }

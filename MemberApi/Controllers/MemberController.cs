@@ -1,14 +1,13 @@
 ﻿using MemberApi.Models;
 using MemberApi.Services;
 using Microsoft.AspNetCore.Authorization;
-using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 
 namespace MemberApi.Controllers
 {
-  
     [Produces("application/json")]
     [ApiController]
+    [Authorize]
     public class MemberController : ControllerBase
     {
         private readonly IMemberService _memberService;
@@ -17,8 +16,6 @@ namespace MemberApi.Controllers
             _memberService = memberService;
         }
         
-        
-        [Authorize]
         [HttpPost]
         [Route("SubmitClaim")]
         public string SubmitClaim([FromBody] ClaimDetails claimDetails)

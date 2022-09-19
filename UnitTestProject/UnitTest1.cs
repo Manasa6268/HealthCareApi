@@ -1,17 +1,12 @@
 using AdminApi.Controllers;
 using AdminApi.Models;
 using AdminApi.Services;
-
 using Moq;
-using System.Security.Claims;
-
 namespace UnitTestProject
 {
     public class UnitTest1
     {
         public Mock<IAdminService> mock = new Mock<IAdminService>();
-        
-
         [Fact]
         public void CreateAccount_Success()
         {
@@ -42,7 +37,6 @@ namespace UnitTestProject
 
 
         }
-
         [Fact]
         public void CreateAccount_Failed()
         {
@@ -96,9 +90,6 @@ namespace UnitTestProject
 
 
         }
-
-        
-
         [Fact]
         public void AssignPhysician_Success()
         {
@@ -119,7 +110,6 @@ namespace UnitTestProject
 
 
         }
-
         [Fact]
         public void AssignPhysician_Failed()
         {
@@ -138,7 +128,61 @@ namespace UnitTestProject
             var result = emp.AssignPhysician(usersDtls);
             Assert.True(TestResult.Equals(result));
         }
+        [Fact]
+        public void GetStates_Success()
+        {
+            List<StateDetails> list = new List<StateDetails>();
+            mock.Setup(p => p.GetStates()).Returns(list);
+            int count = list.Count;
+            AdminController emp = new AdminController(mock.Object);
+            List<StateDetails> list1 = emp.GetStates();
+            Assert.True(count.Equals(list1.Count));
+        }
+        [Fact]
+        public void GetUserTypes_Success()
+        {
+            List<UserTypes> list = new List<UserTypes>();
+            mock.Setup(p => p.GetUserTypes()).Returns(list);
+            int count = list.Count;
+            AdminController emp = new AdminController(mock.Object);
+            List<UserTypes> list1 = emp.GetUserTypes();
+            int count1=list1.Count;
+            Assert.True(count.Equals(count1));
+        }
+        [Fact]
+        public void GetUserNames_Success()
+        {
+            List<string> list = new List<string>();
+            mock.Setup(p => p.GetUserNames()).Returns(list);
+            int count = list.Count;
+            AdminController emp = new AdminController(mock.Object);
+            List<string> list1 = emp.GetUserNames();
+            int count1 = list1.Count;
+            Assert.True(count.Equals(count1));
+        }
+       
+        [Fact]
+        public void GetMails_Success()
+        {
+            List<string> list = new List<string>();
+            mock.Setup(p => p.GetEmails()).Returns(list);
+            int count = list.Count;
+            AdminController emp = new AdminController(mock.Object);
+            List<string> list1 = emp.GetMails();
+            int count1 = list1.Count;
+            Assert.True(count.Equals(count1));
+        }
+        [Fact]
+        public void GetPhysicianName_Success()
+        {
+            List<PhysicianDetails> list = new List<PhysicianDetails>();
+            mock.Setup(p => p.GetPhysicianNames()).Returns(list);
+            int count = list.Count;
+            AdminController emp = new AdminController(mock.Object);
+            List<PhysicianDetails> list1 = emp.GetPhysicianName();
+            int count1 = list1.Count;
+            Assert.True(count.Equals(count1));
+        }
 
-      
     }
 }

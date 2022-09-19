@@ -1,5 +1,4 @@
 ﻿using AuthorizationApi.Models;
-
 namespace AuthorizationApi.Services
 {
     public interface IUserTokenService

@@ -6,7 +6,6 @@
           "Host": "localhost",
           "Port": 7239
         }
-
       ],
       "DownstreamPathTemplate": "/gettoken",
       "DownstreamScheme": "https",
@@ -20,7 +19,6 @@
           "Host": "localhost",
           "Port": 7191
         }
-
       ],
       "DownstreamPathTemplate": "/signup",
       "DownstreamScheme": "https",
@@ -34,7 +32,6 @@
           "Host": "localhost",
           "Port": 7191
         }
-
       ],
       "DownstreamPathTemplate": "/AssignPhysician",
       "DownstreamScheme": "https",
@@ -48,7 +45,6 @@
           "Host": "localhost",
           "Port": 7191
         }
-
       ],
       "DownstreamPathTemplate": "/states",
       "DownstreamScheme": "https",
@@ -62,7 +58,6 @@
           "Host": "localhost",
           "Port": 7191
         }
-
       ],
       "DownstreamPathTemplate": "/api/Admin/usertypes",
       "DownstreamScheme": "https",
